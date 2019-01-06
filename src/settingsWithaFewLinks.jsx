@@ -46,11 +46,13 @@ export class Inputs_settings extends React.Component {
 
     let fewRss = this.state.rssLinks.map((_, indx) => {
       //let {} = this.state
+      debugger;
       let oneRssSettings = {
         rssLink: _,
         speaker: this.state.speaker,
         headerOrMore: this.state.headerOrMore,
         autoplay:
+          // даёт autoplay только "первой" rss-ке
           this.state.curRssPlayingIndx == indx ? this.state.autoplay : false,
         onNothingToPlay: () => {
           l("onNothingToPlay:" + indx);

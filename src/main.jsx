@@ -41,6 +41,29 @@ export function Main() {
       </small>
 
       <Inputs_settings />
+      <div
+        style={{
+          marginTop: 200,
+          marginBottom: 50,
+          width: 100,
+          height: 100,
+          backgroundColor: "gray",
+          float: "right"
+        }}
+        class="rounded-circle text-center"
+      >
+        <br />
+        <span
+          class=""
+          onClick={_ => {
+            localStorage.clear();
+            location.href = location.href;
+            //console.log("localStorage.clear")
+          }}
+        >
+          Сбросить всё
+        </span>
+      </div>
     </div>
   );
 }
