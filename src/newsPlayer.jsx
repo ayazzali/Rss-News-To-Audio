@@ -3,6 +3,11 @@ import React from "react";
 import { NewsJustPlayer } from "./newsJustPlayer.jsx";
 import { l, addItemTo_localStorage } from "./utils";
 import "./styles.css";
+import Parser from "rss-parser";
+let parser = new Parser();
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+const CorsedUrl = url => CORS_PROXY + url;
+
 /**
  * Props:
  * - rssLink
@@ -59,6 +64,7 @@ export class NewsPlayer extends React.Component {
         </a>
       </p>
     ));
+
     return (
       <div>
         {itemToPlay ? (
@@ -85,41 +91,14 @@ export class NewsPlayer extends React.Component {
     addItemTo_localStorage(ENUM.listened, item.link);
     this.forceUpdate();
   }
-
   getNewsBySrc(siteUriRss) {
-    var query = 'select *from rss where url="' + siteUriRss + '"'; //'select * from html where url="'+siteUriRss+'" and xpath="*"'
-    //l("uik"+siteUriRss)
-    var url =
-      "https://query.yahooapis.com/v1/public/yql?q=" +
-      encodeURI(query) +
-      "&format=json";
-
-    return fetch(url, { cache: "force-cache" })
-      .catch(e => {
-        l("GNBS fetchUrl ERROR");
-        l(e);
-      })
-      .then(function(r) {
-        if (r.status != 200) {
-          l("r.status=");
-          l(r.status);
-        }
-        return r.json();
-      })
-      .catch(e => {
-        l("GNBS r.json ERROR");
-        l(e);
-      })
-      .then(function(data) {
-        //json
-        l("GNBS r.json=");
-        console.log(data);
-        return data.query.results.item;
-      })
-      .catch(e => {
-        l("GNBS lastCatch");
-        l(e);
-      });
+    return parser.parseURL(CorsedUrl(siteUriRss)).then(feed => {
+      // console.log(feed.title);// test
+      // feed.items.forEach(item => {
+      //    console.log(item.title + ":" + item.link); // test
+      // });
+      return feed.items;
+    });
   }
 }
 const ENUM = { listened: "listened" };
