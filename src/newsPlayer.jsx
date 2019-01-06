@@ -100,5 +100,40 @@ export class NewsPlayer extends React.Component {
       return feed.items;
     });
   }
+  // getNewsBySrc(siteUriRss) {
+  //   var query = 'select *from rss where url="' + siteUriRss + '"'; //'select * from html where url="'+siteUriRss+'" and xpath="*"'
+  //   //l("uik"+siteUriRss)
+  //   var url =
+  //     "https://query.yahooapis.com/v1/public/yql?q=" +
+  //     encodeURI(query) +
+  //     "&format=json";
+
+  //   return fetch(url, { cache: "force-cache" })
+  //     .catch(e => {
+  //       l("GNBS fetchUrl ERROR");
+  //       l(e);
+  //     })
+  //     .then(function(r) {
+  //       if (r.status != 200) {
+  //         l("r.status=");
+  //         l(r.status);
+  //       }
+  //       return r.json();
+  //     })
+  //     .catch(e => {
+  //       l("GNBS r.json ERROR");
+  //       l(e);
+  //     })
+  //     .then(function(data) {
+  //       //json
+  //       l("GNBS r.json=");
+  //       console.log(data);
+  //       return data.query.results.item;
+  //     })
+  //     .catch(e => {
+  //       l("GNBS lastCatch");
+  //       l(e);
+  //     });
+  // }
 }
 const ENUM = { listened: "listened" };
